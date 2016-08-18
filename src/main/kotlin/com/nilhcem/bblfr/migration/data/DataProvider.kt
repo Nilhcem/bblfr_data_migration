@@ -16,7 +16,7 @@ class DataProvider {
     private val outputFile: File
 
     constructor(args: Array<String>) {
-        if (args.size != 3) throw IllegalArgumentException("Invalid args number.%nHave you run the app through the run.sh file?")
+        if (args.size != 3) throw IllegalArgumentException("Invalid args number.\nHave you run the app through the run.sh file?")
 
         val inputJson = File(args[0]).readText().replaceFirst(Regex("[^{]*"), "")
         inputData = moshi.adapter(InputData::class.java).fromJson(inputJson)
