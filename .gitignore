@@ -1,0 +1,23 @@
+# Temporary files
+*~
+\#*#
+
+# Java class files
+*.class
+
+# Gradle files
+.gradle/
+build/
+
+# IntelliJ
+*.iml
+.idea/
+
+# OSX files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# Output directory
+output
