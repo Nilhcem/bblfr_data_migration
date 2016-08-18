@@ -19,5 +19,6 @@ build/
 # Windows files
 Thumbs.db
 
-# Output directory
+# Input/Output directory
+input
 output

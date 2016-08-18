@@ -30,10 +30,16 @@ sourceSets {
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://repo.eclipse.org/content/groups/releases/"
+    }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile 'org.slf4j:slf4j-simple:1.7.21'
+    compile 'org.eclipse.jgit:org.eclipse.jgit:4.4.1.201607150455-r'
 
     testCompile 'junit:junit:4.12'
     testCompile 'com.google.truth:truth:0.28'
