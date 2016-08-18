@@ -5,6 +5,5 @@ import com.nilhcem.bblfr.migration.model.Mapper
 
 fun main(args: Array<String>) {
     val dataProvider = DataProvider(args)
-    val outputData = Mapper.toOutputData(dataProvider.inputData, dataProvider.sinceMap)
-    dataProvider.persistOutputData(outputData)
+    dataProvider.persistOutputData(Mapper.toOutputData(dataProvider.inputData, dataProvider.sinceMap))
 }
