@@ -8,5 +8,5 @@ val LOG: Logger = LoggerFactory.getLogger("App")
 
 fun main(args: Array<String>) {
     LOG.info("BBLFR data migration tool")
-    DataProvider()
+    val inputData = DataProvider().getInputData()
 }
