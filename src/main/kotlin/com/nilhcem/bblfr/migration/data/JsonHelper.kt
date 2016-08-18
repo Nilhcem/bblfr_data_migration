@@ -1,7 +1,7 @@
 package com.nilhcem.bblfr.migration.data
 
-import com.nilhcem.bblfr.migration.model.input.InputData
-import com.nilhcem.bblfr.migration.model.output.OutputData
+import com.nilhcem.bblfr.migration.model.InputData
+import com.nilhcem.bblfr.migration.model.OutputData
 import com.squareup.moshi.Moshi
 
 object JsonHelper {

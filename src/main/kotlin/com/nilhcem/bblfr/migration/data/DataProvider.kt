@@ -1,7 +1,7 @@
 package com.nilhcem.bblfr.migration.data
 
-import com.nilhcem.bblfr.migration.model.input.InputData
-import com.nilhcem.bblfr.migration.model.output.OutputData
+import com.nilhcem.bblfr.migration.model.InputData
+import com.nilhcem.bblfr.migration.model.OutputData
 import com.squareup.moshi.JsonWriter
 import okio.Buffer
 import org.eclipse.jgit.api.Git
@@ -13,8 +13,8 @@ import org.eclipse.jgit.treewalk.TreeWalk
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
-import com.nilhcem.bblfr.migration.model.input.City as InputCity
-import com.nilhcem.bblfr.migration.model.output.City as OutputCity
+import com.nilhcem.bblfr.migration.model.City as InputCity
+import com.nilhcem.bblfr.migration.model.City as OutputCity
 
 class DataProvider {
 

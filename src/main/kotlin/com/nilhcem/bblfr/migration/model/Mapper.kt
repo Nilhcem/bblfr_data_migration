@@ -1,16 +1,16 @@
 package com.nilhcem.bblfr.migration.model
 
-import com.nilhcem.bblfr.migration.model.input.Bagger
-import com.nilhcem.bblfr.migration.model.input.InputData
-import com.nilhcem.bblfr.migration.model.output.Contacts
-import com.nilhcem.bblfr.migration.model.output.OutputData
-import com.nilhcem.bblfr.migration.model.output.Speaker
-import com.nilhcem.bblfr.migration.model.input.City as InputCity
-import com.nilhcem.bblfr.migration.model.input.Session as InputSession
-import com.nilhcem.bblfr.migration.model.input.Website as InputWebsite
-import com.nilhcem.bblfr.migration.model.output.City as OutputCity
-import com.nilhcem.bblfr.migration.model.output.Session as OutputSession
-import com.nilhcem.bblfr.migration.model.output.Website as OutputWebsite
+import com.nilhcem.bblfr.migration.model.Bagger
+import com.nilhcem.bblfr.migration.model.InputData
+import com.nilhcem.bblfr.migration.model.Contacts
+import com.nilhcem.bblfr.migration.model.OutputData
+import com.nilhcem.bblfr.migration.model.Speaker
+import com.nilhcem.bblfr.migration.model.City as InputCity
+import com.nilhcem.bblfr.migration.model.Session as InputSession
+import com.nilhcem.bblfr.migration.model.Website as InputWebsite
+import com.nilhcem.bblfr.migration.model.City as OutputCity
+import com.nilhcem.bblfr.migration.model.Session as OutputSession
+import com.nilhcem.bblfr.migration.model.Website as OutputWebsite
 
 object Mapper {
 
