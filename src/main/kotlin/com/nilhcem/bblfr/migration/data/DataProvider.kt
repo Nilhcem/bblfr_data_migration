@@ -3,6 +3,7 @@ package com.nilhcem.bblfr.migration.data
 import com.nilhcem.bblfr.migration.model.InputData
 import com.nilhcem.bblfr.migration.model.OutputData
 import com.squareup.moshi.JsonWriter
+import com.squareup.moshi.Moshi
 import okio.Buffer
 import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.lib.Constants
@@ -13,13 +14,13 @@ import org.eclipse.jgit.treewalk.TreeWalk
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
-import com.nilhcem.bblfr.migration.model.City as InputCity
-import com.nilhcem.bblfr.migration.model.City as OutputCity
 
 class DataProvider {
 
     companion object {
         val LOG: Logger = LoggerFactory.getLogger(DataProvider::class.java)
+        val MOSHI = Moshi.Builder().build()
+
         val GIT_URL = "https://github.com/brownbaglunch/bblfr_data.git"
         val GIT_BRANCH = "gh-pages"
         val RH_FILE = "baggers-rh.js"
@@ -46,7 +47,7 @@ class DataProvider {
             // Response starts with "var data = {", which we should remove.
             val json = fileContent.replaceFirst(Regex("[^{]*"), "")
 
-            return JsonHelper.INPUT_ADAPTER.fromJson(json)
+            return MOSHI.adapter(InputData::class.java).fromJson(json)
         } finally {
             revWalk.dispose()
         }
@@ -61,7 +62,7 @@ class DataProvider {
             val buffer = Buffer()
             val jsonWriter = JsonWriter.of(buffer)
             jsonWriter.setIndent("\t")
-            JsonHelper.OUTPUT_ADAPTER.toJson(jsonWriter, output)
+            MOSHI.adapter(OutputData::class.java).toJson(jsonWriter, output)
             out.println(buffer.readUtf8())
         }
     }
