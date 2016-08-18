@@ -2,11 +2,13 @@ package com.nilhcem.bblfr.migration.model
 
 object Mapper {
 
-    fun toOutputData(inputData: InputData) = OutputData(toOutputSpeakers(inputData.baggers), toCitiesMap(inputData.cities))
+    fun toOutputData(inputData: InputData, sinceMap: Map<String, String>) =
+            OutputData(toOutputSpeakers(inputData.baggers, sinceMap), toCitiesMap(inputData.cities))
 
-    private fun toOutputSpeakers(input: List<InputBagger>) = input.map {
-        OutputSpeaker("TODO", it.name, it.bio, it.picture, toOutputWebsites(it.websites), it.location,
-                toOutputSessions(it.sessions, it.tags), it.cities, OutputContacts(it.twitter, it.mail))
+    private fun toOutputSpeakers(input: List<InputBagger>, sinceMap: Map<String, String>) = input.map {
+        OutputSpeaker(sinceMap[it.name], it.name, it.bio, it.picture,
+                toOutputWebsites(it.websites), it.location, toOutputSessions(it.sessions, it.tags),
+                it.cities, OutputContacts(it.twitter, it.mail))
     }
 
     private fun toCitiesMap(input: List<InputCity>) = input.associateBy({ it.name }) { OutputCity(it.name, it.ville_img, it.lat, it.lng) }

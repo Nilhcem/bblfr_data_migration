@@ -20,5 +20,5 @@ build/
 Thumbs.db
 
 # Input/Output directory
-input
-output
+bblfr_input
+bblfr_output
