@@ -1,6 +1,9 @@
 package com.nilhcem.bblfr.migration.data
 
 import com.nilhcem.bblfr.migration.model.input.InputData
+import com.nilhcem.bblfr.migration.model.output.OutputData
+import com.squareup.moshi.JsonWriter
+import okio.Buffer
 import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.lib.Constants
 import org.eclipse.jgit.lib.Repository
@@ -10,22 +13,25 @@ import org.eclipse.jgit.treewalk.TreeWalk
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
+import com.nilhcem.bblfr.migration.model.input.City as InputCity
+import com.nilhcem.bblfr.migration.model.output.City as OutputCity
 
 class DataProvider {
 
     companion object {
         val LOG: Logger = LoggerFactory.getLogger(DataProvider::class.java)
-        val DIR_NAME = "input"
         val GIT_URL = "https://github.com/brownbaglunch/bblfr_data.git"
         val GIT_BRANCH = "gh-pages"
         val RH_FILE = "baggers-rh.js"
     }
 
     val inputDir: File
+    val outputDir: File
     val repository: Repository
 
     constructor() {
-        inputDir = createInputDir(DIR_NAME)
+        inputDir = createDir("input")
+        outputDir = createDir("output")
         cloneRepo(GIT_URL, GIT_BRANCH, inputDir)
         repository = getRepo(File(inputDir, ".git"))
     }
@@ -46,15 +52,29 @@ class DataProvider {
         }
     }
 
-    private fun createInputDir(name: String): File {
-        LOG.info("Create input directory")
+    fun persistOutputData(output: OutputData) {
+        LOG.info("Persist output data")
 
-        val inputDir = File(name)
-        if (inputDir.exists()) {
-            inputDir.deleteRecursively()
+        File(outputDir, RH_FILE).printWriter().use { out ->
+            out.print("var data = ")
+
+            val buffer = Buffer()
+            val jsonWriter = JsonWriter.of(buffer)
+            jsonWriter.setIndent("\t")
+            JsonHelper.OUTPUT_ADAPTER.toJson(jsonWriter, output)
+            out.println(buffer.readUtf8())
         }
-        inputDir.mkdirs()
-        return inputDir
+    }
+
+    private fun createDir(name: String): File {
+        LOG.info("Create directory: $name")
+
+        val dir = File(name)
+        if (dir.exists()) {
+            dir.deleteRecursively()
+        }
+        dir.mkdirs()
+        return dir
     }
 
     private fun cloneRepo(url: String, branch: String, directory: File) {
